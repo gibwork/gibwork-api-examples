@@ -17,6 +17,10 @@ interface Task {
     symbol: string
   }
   type: string
+  user: {
+    firstName: string
+    lastName: string
+  }
 }
 
 export default function TaskList() {
