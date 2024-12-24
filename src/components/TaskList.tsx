@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { fetchTasks } from '../actions/tasks'
+import Image from 'next/image'
 
 interface Task {
   id: string
@@ -10,6 +11,11 @@ interface Task {
   requirements: string
   tags: string[]
   payer: string
+  asset: {
+    imageUrl: string
+    reward: number
+    symbol: string
+  }
 }
 
 export default function TaskList() {
@@ -22,6 +28,7 @@ export default function TaskList() {
         fetchTasks().then((data) => {
             setTasks(data.results || [])
             setLoading(false)
+            console.log('Tasks:', data)
         })
       } catch (error) {
         console.error('Error fetching tasks:', error)
@@ -43,8 +50,14 @@ export default function TaskList() {
   return (
     <ul className="space-y-4 w-full">
       {tasks.map((task) => (
-        <li key={task.id} className="border rounded-lg p-4">
+        <li key={task.id} className="border rounded-lg p-4 w-full">
+          <div className='flex justify-between'>
           <h3 className="text-lg font-semibold">{task.title}</h3>
+          <div className='flex items-center'>
+            <img src={task.asset.imageUrl} alt="token" width={30} height={30} className="rounded-full" />
+            <span className="text-lg font-semibold text-green-500 ml-2">{task.asset.reward} {task.asset.symbol}</span>
+          </div>
+          </div>
           <p className="text-gray-600">{task.content}</p>
           <div className="mt-2">
             {task.tags.map((tag) => (
