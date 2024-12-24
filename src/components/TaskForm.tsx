@@ -61,14 +61,14 @@ export default function TaskForm() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Create New Task</h2>
+    <div className="max-w-2xl mx-auto p-8 bg-black/10 backdrop-blur-xl rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold mb-8 text-white">Create New Task</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Column */}
           <div className="space-y-6">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="title" className="block text-sm font-medium text-white/80 mb-1">
                 Title
               </label>
               <input
@@ -77,13 +77,13 @@ export default function TaskForm() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:ring-2 focus:ring-[#641AE6] focus:border-[#641AE6] transition-colors placeholder-white/30"
                 placeholder="Enter task title"
               />
             </div>
 
             <div>
-              <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="tags" className="block text-sm font-medium text-white/80 mb-1">
                 Tags
               </label>
               <input
@@ -92,13 +92,13 @@ export default function TaskForm() {
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:ring-2 focus:ring-[#641AE6] focus:border-[#641AE6] transition-colors placeholder-white/30"
                 placeholder="e.g. design, development, marketing"
               />
             </div>
 
             <div>
-              <label htmlFor="payer" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="payer" className="block text-sm font-medium text-white/80 mb-1">
                 Payer Address
               </label>
               <input
@@ -107,7 +107,7 @@ export default function TaskForm() {
                 value={payer}
                 onChange={(e) => setPayer(e.target.value)}
                 required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:ring-2 focus:ring-[#641AE6] focus:border-[#641AE6] transition-colors placeholder-white/30"
                 placeholder="Enter payer's wallet address"
               />
             </div>
@@ -116,7 +116,7 @@ export default function TaskForm() {
           {/* Right Column */}
           <div className="space-y-6">
             <div>
-              <label htmlFor="mintAddress" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="mintAddress" className="block text-sm font-medium text-white/80 mb-1">
                 Token Mint Address
               </label>
               <input
@@ -125,13 +125,13 @@ export default function TaskForm() {
                 value={mintAddress}
                 onChange={(e) => setMintAddress(e.target.value)}
                 required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:ring-2 focus:ring-[#641AE6] focus:border-[#641AE6] transition-colors placeholder-white/30"
                 placeholder="Enter token mint address"
               />
             </div>
 
             <div>
-              <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="amount" className="block text-sm font-medium text-white/80 mb-1">
                 Amount
               </label>
               <input
@@ -142,7 +142,7 @@ export default function TaskForm() {
                 required
                 min="0"
                 step="0.000000001"
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:ring-2 focus:ring-[#641AE6] focus:border-[#641AE6] transition-colors placeholder-white/30"
                 placeholder="Enter token amount"
               />
             </div>
@@ -152,7 +152,7 @@ export default function TaskForm() {
         {/* Full Width Fields */}
         <div className="space-y-6">
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="content" className="block text-sm font-medium text-white/80 mb-1">
               Content
             </label>
             <textarea
@@ -161,13 +161,13 @@ export default function TaskForm() {
               onChange={(e) => setContent(e.target.value)}
               required
               rows={4}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              className="w-full px-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:ring-2 focus:ring-[#641AE6] focus:border-[#641AE6] transition-colors placeholder-white/30"
               placeholder="Describe your task in detail"
             />
           </div>
 
           <div>
-            <label htmlFor="requirements" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="requirements" className="block text-sm font-medium text-white/80 mb-1">
               Requirements
             </label>
             <textarea
@@ -176,7 +176,7 @@ export default function TaskForm() {
               onChange={(e) => setRequirements(e.target.value)}
               required
               rows={4}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              className="w-full px-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:ring-2 focus:ring-[#641AE6] focus:border-[#641AE6] transition-colors placeholder-white/30"
               placeholder="List the requirements for this task"
             />
           </div>
@@ -185,7 +185,7 @@ export default function TaskForm() {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+            className="px-6 py-3 bg-[#641AE6] text-white font-medium rounded-lg hover:bg-[#7938E6] focus:outline-none focus:ring-2 focus:ring-[#641AE6] focus:ring-offset-2 focus:ring-offset-black/10 transition-colors"
           >
             Create Task
           </button>

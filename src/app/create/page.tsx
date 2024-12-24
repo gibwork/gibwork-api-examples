@@ -1,5 +1,5 @@
-import TaskForm from '../components/TaskForm'
-import TaskList from '../components/TaskList'
+import TaskForm from '../../components/TaskForm'
+import TaskList from '../../components/TaskList'
 
 export default function Home() {
   return (
@@ -7,8 +7,7 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-6">Gibwork API Demo</h1>
       <div className="flex md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-2xl font-semibold mb-4">Explore Tasks</h2>
-          <TaskList />
+          <TaskForm />
         </div>
       </div>
     </main>
