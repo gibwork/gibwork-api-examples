@@ -32,7 +32,6 @@ export function UiLayout({ children, links }: { children: ReactNode; links: { la
         </div>
         <div className="flex-none space-x-2">
           <WalletButton />
-          <ClusterUiSelect />
         </div>
       </div>
       <ClusterChecker>

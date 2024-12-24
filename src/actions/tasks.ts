@@ -34,6 +34,7 @@ export async function createTask(input: CreateTaskInput) {
   })
 
   if (!response.ok) {
+    console.log(response)
     throw new Error('Failed to create task')
   }
 
