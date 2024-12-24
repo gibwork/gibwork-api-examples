@@ -82,6 +82,11 @@ export default function TaskPage(props: taskPops) {
 
   const reward = calculateReward()
 
+  const handleSubmit = () =>{
+    const url = `https://app.gib.work/tasks/${task.id}`
+    window.open(url, '_blank')
+  }
+
   return (
     <div className="bg-[#111827] text-gray-100 block">
       <div className="mx-auto px-4 py-8">
@@ -144,7 +149,7 @@ export default function TaskPage(props: taskPops) {
                   {task.user.firstName} {task.user.lastName}
                 </span>
               </div>
-              <button className="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white transition-colors">
+              <button className="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white transition-colors" onClick={handleSubmit}>
                 Submit Solution
               </button>
             </div>
