@@ -21,12 +21,10 @@ export default function TaskList() {
       try {
         fetchTasks().then((data) => {
             setTasks(data.results || [])
-            console.log(tasks);
-            console.log(data);
+            setLoading(false)
         })
       } catch (error) {
         console.error('Error fetching tasks:', error)
-      } finally {
         setLoading(false)
       }
     }
@@ -43,7 +41,7 @@ export default function TaskList() {
   }
 
   return (
-    <ul className="space-y-4">
+    <ul className="space-y-4 w-full">
       {tasks.map((task) => (
         <li key={task.id} className="border rounded-lg p-4">
           <h3 className="text-lg font-semibold">{task.title}</h3>
