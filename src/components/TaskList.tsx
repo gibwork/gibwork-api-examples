@@ -49,6 +49,10 @@ export default function TaskList() {
   }
 
   const handleTaskClick = (id: string, type: string) => {
+    if(type == 'tasks') {
+      window.location.href = `/task/${id}`
+      return;
+    }
     const url = `https://app.gib.work/${type}/${id}`
     window.open(url, '_blank')
   }
