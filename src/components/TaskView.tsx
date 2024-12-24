@@ -13,6 +13,7 @@ interface TaskDetail {
     amount: string
     symbol: string
     price: number
+    decimals: number
   }
   user: {
     firstName: string
@@ -71,7 +72,7 @@ export default function TaskPage(props: taskPops) {
   }
 
   const calculateReward = () => {
-    const amount = parseFloat(task.asset.amount) / Math.pow(10, 6)
+    const amount = parseFloat(task.asset.amount) / Math.pow(10, task.asset.decimals)
     const priceUSD = task.asset.price
     return {
       tokens: amount.toFixed(2),
@@ -143,6 +144,9 @@ export default function TaskPage(props: taskPops) {
                   {task.user.firstName} {task.user.lastName}
                 </span>
               </div>
+              <button className="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white transition-colors">
+                Submit Solution
+              </button>
             </div>
           </div>
         </div>
