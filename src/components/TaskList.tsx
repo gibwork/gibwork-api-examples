@@ -16,6 +16,7 @@ interface Task {
     reward: number
     symbol: string
   }
+  type: string
 }
 
 export default function TaskList() {
@@ -47,10 +48,15 @@ export default function TaskList() {
     return <div>No tasks available.</div>
   }
 
+  const handleTaskClick = (id: string, type: string) => {
+    const url = `https://app.gib.work/${type}/${id}`
+    window.open(url, '_blank')
+  }
+
   return (
     <ul className="space-y-4 w-full">
       {tasks.map((task) => (
-        <li key={task.id} className="border rounded-lg p-4 w-full">
+        <li key={task.id} className="border rounded-lg p-4 w-full cursor-pointer" onClick={() => handleTaskClick(task.id, task.type)}>
           <div className='flex justify-between'>
           <h3 className="text-lg font-semibold">{task.title}</h3>
           <div className='flex items-center'>
