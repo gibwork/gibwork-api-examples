@@ -51,8 +51,8 @@ export default function TaskForm() {
       setPayer('')
       setMintAddress('')
       setAmount(0)
-      
-      alert('Task created successfully!')
+      alert(`Task created successfully! Task ID: ${response.taskId}`)
+      window.location.href = '/'
       
     } catch (error) {
       console.error('Error creating task:', error)
