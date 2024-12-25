@@ -1,5 +1,6 @@
 'use client';
 
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -21,6 +22,8 @@ const Navbar = () => {
                         className="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Explore Postings</p></Link>
                     <Link href="/task"><p
                         className="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Create A Posting</p></Link>
+                    <WalletMultiButton className="custom-wallet-button"/>
+
                 </nav>
 
                 <div

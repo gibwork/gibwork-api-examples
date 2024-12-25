@@ -1,8 +1,15 @@
 "use client"
 import React from "react";
 import FormComponent from "./components/TaskForm";
+import { TaskResponse } from "./data";
+import { VersionedTransaction } from "@solana/web3.js";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 const Page = () => {
+
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+
   const handleFormSubmit = async (formData: any) => {
     const options = {
       method: "POST",
@@ -12,8 +19,13 @@ const Page = () => {
 
     try {
       const response = await fetch("https://api2.gib.work/tasks/public/transaction", options);
-      const data = await response.json();
+      const data:TaskResponse = await response.json();
       console.log("Response:", data);
+      const tx = VersionedTransaction.deserialize(Buffer.from(data.serializedTransaction, "base64"))
+      const blockhash = (await connection.getLatestBlockhash()).blockhash;
+      tx.message.recentBlockhash = blockhash;
+      const signature = await sendTransaction(tx, connection);
+      console.log("Signature:", signature);
     } catch (error) {
       console.error("Error:", error);
     }
