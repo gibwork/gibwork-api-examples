@@ -38,7 +38,13 @@ export default function TaskForm() {
         preflightCommitment: 'confirmed',
       })
 
-      const confirmation = await connection.confirmTransaction(signature, 'confirmed')
+      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+      
+      const confirmation =  await connection.confirmTransaction({
+        signature,
+        blockhash,
+        lastValidBlockHeight
+      });
       
       if (confirmation.value.err) {
         throw new Error('Transaction failed to confirm')
