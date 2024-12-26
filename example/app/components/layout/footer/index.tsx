@@ -1,10 +1,11 @@
+import Link from "next/link";
 
 const Footer = () => {
     return (
         <footer className="px-4 pt-12 pb-8 text-white bg-white border-t border-gray-200">
             <div className="container flex flex-col justify-between max-w-6xl px-4 mx-auto overflow-hidden lg:flex-row">
                 <div className="w-full pl-12 mr-4 text-left lg:w-1/4 sm:text-center sm:pl-0 lg:text-left">
-                    <a href="/"
+                    <Link href="/"
                         className="flex justify-start block text-left sm:text-center lg:text-left sm:justify-center lg:justify-start">
                         <span className="flex items-start sm:items-center">
                             <svg className="w-auto h-6 text-gray-800 fill-current" viewBox="0 0 194 116"
@@ -17,7 +18,7 @@ const Footer = () => {
                                 </g>
                             </svg>
                         </span>
-                    </a>
+                    </Link>
                     <p className="mt-6 mr-4 text-base text-gray-500">Crafting the next-level of user experience and engagement.
                     </p>
                 </div>

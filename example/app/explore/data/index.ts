@@ -5,7 +5,7 @@ interface TaskAsset {
 }
 
 // Interface for individual task
-interface Task {
+export interface Task {
     id: string;
     title: string;
     createdAt: string; // ISO string
@@ -16,7 +16,7 @@ interface Task {
 }
 
 // Interface for the API response
-interface TasksResponse {
+export interface TasksResponse {
     results: Task[];
     lastPage: number; // Total pages available
 }

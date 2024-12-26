@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
+import { Task, TasksResponse } from "./data";
 
 const ActiveTasksPage = () => {
     const [tasks, setTasks] = useState<Task[]>([]); // Array of tasks
@@ -7,7 +8,7 @@ const ActiveTasksPage = () => {
     const [pageSize, setPageSize] = useState(15); // Items per page
     const [totalPages, setTotalPages] = useState(0); // Total number of pages
     const [isLoading, setIsLoading] = useState(false); // Loading state
-    const [error, setError] = useState<any>(null); // Error state
+    const [error, setError] = useState<string | null>(null); // Error state
 
     // Fetch data function
     const fetchTasks = async (): Promise<void> => {
@@ -29,7 +30,7 @@ const ActiveTasksPage = () => {
             throw new Error("Failed to fetch tasks");
           }
         } catch (err) {
-          setError(err);
+          setError(String(err));
         } finally {
           setIsLoading(false);
         }
@@ -40,21 +41,6 @@ const ActiveTasksPage = () => {
     useEffect(() => {
         fetchTasks();
     }, [page, pageSize]);
-
-    // Handle page size change
-    const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setPageSize(Number(e.target.value));
-        setPage(1); // Reset to the first page
-    };
-
-    // Handle page navigation
-    const goToNextPage = () => {
-        if (page < totalPages) setPage(page + 1);
-    };
-
-    const goToPreviousPage = () => {
-        if (page > 1) setPage(page - 1);
-    };
 
     return (
         <div className="container mx-auto p-4">

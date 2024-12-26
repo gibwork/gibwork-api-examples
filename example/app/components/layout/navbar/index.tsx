@@ -12,9 +12,9 @@ const Navbar = () => {
             <div
                 className="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0">
 
-                <a href="/" className="relative p-8 items-center inline-block h-full font-black leading-none">
+                <Link href="/" className="relative p-8 items-center inline-block h-full font-black leading-none">
                     <span className="ml-3 text-xl text-gray-800">Example App<span className="text-pink-500">.</span></span>
-                </a>
+                </Link>
 
                 <nav id="nav"
                     className="absolute top-0 left-0 z-50 flex flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">

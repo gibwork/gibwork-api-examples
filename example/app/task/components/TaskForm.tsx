@@ -5,7 +5,7 @@ interface Token {
   amount: number;
 }
 
-interface FormData {
+export interface FormData {
   title: string;
   content: string;
   requirements: string;

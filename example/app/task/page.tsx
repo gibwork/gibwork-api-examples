@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import FormComponent from "./components/TaskForm";
+import FormComponent, { FormData } from "./components/TaskForm";
 import { TaskResponse } from "./data";
 import { VersionedTransaction } from "@solana/web3.js";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
@@ -8,9 +8,9 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 const Page = () => {
 
   const { connection } = useConnection();
-  const { publicKey, sendTransaction } = useWallet();
+  const { sendTransaction } = useWallet();
 
-  const handleFormSubmit = async (formData: any) => {
+  const handleFormSubmit = async (formData: FormData) => {
     const options = {
       method: "POST",
       headers: { accept: "application/json", "content-type": "application/json" },
