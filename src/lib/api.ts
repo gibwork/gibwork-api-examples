@@ -17,16 +17,22 @@ export async function createTask(taskData: Partial<Task>) {
     .catch((err) => console.error(err));
 }
 
-export async function fetchTasks() {
-  const url = "https://api2.gib.work/explore";
+export async function fetchTasks(page: number = 1, limit: number = 15): Promise<PaginatedResponse> {
+  const url = `https://api2.gib.work/explore?page=${page}&limit=${limit}`;  
   const options = { method: "GET", headers: { accept: "application/json" } };
 
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    return data.results;
+    return data;
   } catch (error) {
     console.error('Error fetching tasks:', error);
-    return [];
+    return {
+      results: [],
+      lastPage: 1,
+      page: 1,
+      limit: 15,
+      total: 0
+    };
   }
 }
