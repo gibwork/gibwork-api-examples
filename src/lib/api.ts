@@ -21,10 +21,12 @@ export async function fetchTasks() {
   const url = "https://api2.gib.work/explore";
   const options = { method: "GET", headers: { accept: "application/json" } };
 
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((json) => {
-      return json.results;
-    })
-    .catch((err) => console.error(err));
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+    return [];
+  }
 }
