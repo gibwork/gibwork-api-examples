@@ -48,14 +48,17 @@ export default function TaskList() {
       <div className="divide-y">
         {data.results.map((task: Task) => (
           <div key={task.id} className="py-4">
-            <h3 className="font-semibold">{task.title}</h3>
+            <div className="flex justify-between items-start">
+              <h3 className="font-semibold">{task.title}</h3>
+              <div className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                {task.asset.price} {task.asset.symbol}
+              </div>
+            </div>
             <p className="text-gray-600 mt-1">{task.description}</p>
             <div className="mt-2 text-sm text-gray-500">
               <span>Status: {task.status}</span>
               <span className="mx-2">•</span>
-              <span>
-                Created: {new Date(task.createdAt).toLocaleDateString()}
-              </span>
+              <span>Created: {new Date(task.createdAt).toLocaleDateString()}</span>
               <span className="mx-2">•</span>
               <span>
                 Submission Deadline:{" "}

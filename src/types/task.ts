@@ -1,5 +1,7 @@
 interface Asset{
   imageUrl: string;
+  price: number;
+  symbol: string;
 }
 
 export interface PaginatedResponse {
