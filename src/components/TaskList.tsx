@@ -5,6 +5,7 @@ import { fetchTasks } from "@/lib/api";
 import { Task, PaginatedResponse } from "@/types/task";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export default function TaskList() {
   const router = useRouter();
@@ -55,6 +56,13 @@ export default function TaskList() {
               </div>
             </div>
             <p className="text-gray-600 mt-1">{task.description}</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {task.tags.map((tag) => (
+                <Badge key={tag} variant="secondary" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
             <div className="mt-2 text-sm text-gray-500">
               <span>Status: {task.status}</span>
               <span className="mx-2">•</span>

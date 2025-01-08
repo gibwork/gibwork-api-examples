@@ -22,6 +22,7 @@ export interface Task {
     deadline: string;
     asset: Asset;
     assetId: string;
+    tags: string[];
     // Add other fields based on your API response
   }
 
