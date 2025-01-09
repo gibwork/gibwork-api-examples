@@ -36,3 +36,16 @@ export async function fetchTasks(page: number = 1, limit: number = 15): Promise<
     };
   }
 }
+
+export async function fetchSearch(id: string){
+  const url = `https://api2.gib.work/tasks/${id}`;
+  const options = {method: 'GET'};
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error searching:', error);
+    return "";
+  }
+}
