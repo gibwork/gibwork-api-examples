@@ -2,14 +2,6 @@
 
 This project is a task management application built with React, TypeScript, and Tailwind CSS. It uses the Gibwork API to manage tasks.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Scripts](#scripts)
-- [License](#license)
-
 ## Installation
 
 1. Clone the repository:
