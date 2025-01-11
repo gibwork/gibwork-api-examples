@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { fetchTasks } from "@/lib/api";
-import { Task, PaginatedResponse } from "@/types/task";
+import { Task, PaginatedResponse } from "@/types/types";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
