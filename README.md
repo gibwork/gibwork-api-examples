@@ -66,57 +66,119 @@ gibwork/
 
 ### API and Utils
 
-1. `src/utils/api.ts`
+1. `src/lib/api.ts`
    - API endpoint definitions
+
+      a. Task Creation
+      ``` const url = "https://api2.gib.work/tasks/public/transaction"; ```
+      b. Task Listing
+      ``` const url = `https://api2.gib.work/explore?page=${page}&limit=${limit}`; ``` 
+
    - Task creation function (`createTask`)
+    
+      ``` 
+      export async function createTask(taskData: {
+      title: string;
+      content: string;
+      requirements: string;
+      tags: string[];
+      payer: string;
+      token: {
+        mintAddress: string;
+        amount: string;
+      };
+    }) {
+      const url = "https://api2.gib.work/tasks/public/transaction";
+      const options = {
+        method: "POST",
+        headers: { accept: "application/json", "content-type": "application/json" },
+        body: JSON.stringify({
+          token: {
+            mintAddress: taskData.token.mintAddress,
+            amount: parseInt(taskData.token.amount, 10),
+          },
+          title: taskData.title,
+          content: taskData.content,
+          requirements: taskData.requirements,
+          tags: taskData.tags,
+          payer: taskData.payer,
+        }),
+      };
+      try {
+        const response = await fetch(url, options)
+          .then((res) => res.json())
+          .then((json) => {
+            console.log(json);
+            window.open(`https://app.gib.work/tasks/${json.taskId}`, "_blank");
+          })
+          .catch((err) => console.error(err));
+        alert("Task created successfully");
+      } catch (error) {
+        console.error("Sending request failed, Error:", error);
+      }
+    } 
+    ```
    - Data fetching utilities
-   - Error handling for API calls
+
+   ```
+   export async function fetchTasks(
+  page: number = 1,
+  limit: number = 15
+): Promise<PaginatedResponse> {
+  const url = `https://api2.gib.work/explore?page=${page}&limit=${limit}`;
+  const options = { method: "GET", headers: { accept: "application/json" } };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    return {
+      results: [],
+      lastPage: 1,
+      page: 1,
+      limit: 15,
+      total: 0,
+    };
+  }
+}
+
+   ```
 
 ## Setup and Installation
 
 1. Clone the repository:
+    
+with https endpoint:
 ```bash
-git clone https://github.com/yourusername/gibwork.git
+git clone https://github.com/dipansrimany2006/gibwork-api-examples.git
 cd gibwork
 ```
+with ssh key:
+```bash
+git clone git@github.com:dipansrimany2006/gibwork-api-examples.git
+cd gibwork
+```
+ 
 
 2. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Copy `.env.example` to `.env.local` and fill in required values:
-```bash
-cp .env.example .env.local
-```
-
-4. Run the development server:
+3. Run the development server:
 ```bash
 npm run dev
 ```
 
-## Environment Variables
-
-Required environment variables:
-```
-NEXT_PUBLIC_API_URL=https://api2.gib.work
-```
-
 ## Technology Stack
 
-- Next.js 13+ (App Router)
+- Next.js 15 (App Router)
 - TypeScript
 - Tailwind CSS
 - Solana Web3.js
 - Solana Wallet Adapter
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## Development Guidelines
 
