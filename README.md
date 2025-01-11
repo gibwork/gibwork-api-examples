@@ -1,36 +1,199 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gibwork - Task Management Platform on Solana
 
-## Getting Started
+A decentralized platform for creating and managing tasks using Solana blockchain technology.
 
-First, run the development server:
+## Project Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+gibwork/
+├── src/
+│   ├── app/                         # Next.js application pages
+│   │   ├── createTask/         
+│   │   │   └── page.tsx            # Task creation form and logic
+│   │   ├── listedTask/              
+│   │   │   └── page.tsx            # Display of all listed tasks
+│   │   └── layout.tsx               
+│   ├── components/ 
+│   │   ├── ui/                     # All shadcn components 
+│   │   ├── Navbar.tsx              # Navigation bar component
+│   │   ├── CreateTaskForm.tsx      # Tasks are created using this component 
+│   │   ├── TaskList.tsx            # All tasks display component
+│   │   └── AppWalletProvider.tsx   # Solana wallet integration
+│   ├── lib/                         
+│   │   ├── api.ts                  # API interaction functions
+│   │   └── utils.ts
+│   └── types/
+│       └── types.ts                # Type definitions for the application (Interface)
+├── public/                         # Static files and assets
+├── next.config.js                 # Next.js configuration
+├── package.json                   # Project dependencies and scripts
+└── tailwind.config.js            # Tailwind CSS configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Task Creation and Management
+- Solana Wallet Integration
+- Task Listing and Browsing
+- Responsive Design
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Important Files and Their Functions
 
-## Learn More
+### Core Components
 
-To learn more about Next.js, take a look at the following resources:
+1. `src/components/CreateTaskForm.tsx`
+   - Handles task creation form
+   - Manages form validation and submission
+   - Integrates with Solana wallet for transactions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. `src/components/listedTask/TaskList.tsx`
+   - Displays all listed tasks
+   - Implements task filtering and sorting
+   - Manages task data fetching and display
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. `src/components/Navbar.tsx`
+   - Main navigation component
+   - Wallet connection button
+   - Navigation links
+   - Responsive design implementation
 
-## Deploy on Vercel
+4. `src/components/AppWalletProvider.tsx`
+   - Solana wallet adapter configuration
+   - Wallet connection state management
+   - Error handling for wallet operations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. `src/lib/api.ts`
+   - GET method created for fetching tasks
+   - POST method created for creating new tasks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. `src/types/types.ts`
+   - Type definitions for the application (Interface)
+
+### API and Utils
+
+1. `src/lib/api.ts`
+   - API endpoint definitions
+
+     a. Task Creation
+     ```typescript
+     const url = "https://api2.gib.work/tasks/public/transaction";
+     ```
+     
+     b. Task Listing
+     ```typescript
+     const url = `https://api2.gib.work/explore?page=${page}&limit=${limit}`;
+     ```
+
+   - Task creation function (`createTask`)
+     ```typescript
+     export async function createTask(taskData: {
+       title: string;
+       content: string;
+       requirements: string;
+       tags: string[];
+       payer: string;
+       token: {
+         mintAddress: string;
+         amount: string;
+       };
+     }) {
+       const url = "https://api2.gib.work/tasks/public/transaction";
+       const options = {
+         method: "POST",
+         headers: { accept: "application/json", "content-type": "application/json" },
+         body: JSON.stringify({
+           token: {
+             mintAddress: taskData.token.mintAddress,
+             amount: parseInt(taskData.token.amount, 10),
+           },
+           title: taskData.title,
+           content: taskData.content,
+           requirements: taskData.requirements,
+           tags: taskData.tags,
+           payer: taskData.payer,
+         }),
+       };
+       try {
+         const response = await fetch(url, options)
+           .then((res) => res.json())
+           .then((json) => {
+             console.log(json);
+             window.open(`https://app.gib.work/tasks/${json.taskId}`, "_blank");
+           })
+           .catch((err) => console.error(err));
+         alert("Task created successfully");
+       } catch (error) {
+         console.error("Sending request failed, Error:", error);
+       }
+     }
+     ```
+
+   - Data fetching utilities
+     ```typescript
+     export async function fetchTasks(
+       page: number = 1,
+       limit: number = 15
+     ): Promise<PaginatedResponse> {
+       const url = `https://api2.gib.work/explore?page=${page}&limit=${limit}`;
+       const options = { method: "GET", headers: { accept: "application/json" } };
+
+       try {
+         const response = await fetch(url, options);
+         const data = await response.json();
+         return data;
+       } catch (error) {
+         console.error("Error fetching tasks:", error);
+         return {
+           results: [],
+           lastPage: 1,
+           page: 1,
+           limit: 15,
+           total: 0,
+         };
+       }
+     }
+     ```
+
+## Setup and Installation
+
+1. Clone the repository:
+    
+   With HTTPS endpoint:
+   ```bash
+   git clone https://github.com/dipansrimany2006/gibwork-api-examples.git
+   cd gibwork
+   ```
+
+   With SSH key:
+   ```bash
+   git clone git@github.com:dipansrimany2006/gibwork-api-examples.git
+   cd gibwork
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Technology Stack
+
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+- Solana Web3.js
+- Solana Wallet Adapter
+
+## Development Guidelines
+
+- Follow TypeScript best practices
+- Use Tailwind CSS for styling
+- Ensure responsive design
+- Test wallet integration thoroughly
+- Follow the existing component structure
+- Comment complex logic
+- Keep components modular and reusable
