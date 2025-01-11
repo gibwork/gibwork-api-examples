@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useCallback, useEffect, useState } from "react";
 import { fetchTasks } from "@/lib/api";
@@ -11,8 +11,8 @@ export default function TaskList() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
-  
+  const currentPage = Number(searchParams.get("page")) || 1;
+
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<PaginatedResponse | null>(null);
 
@@ -22,7 +22,7 @@ export default function TaskList() {
       const result = await fetchTasks(page);
       setData(result);
     } catch (error) {
-      console.error('Error fetching tasks:', error);
+      console.error("Error fetching tasks:", error);
     } finally {
       setLoading(false);
     }
@@ -34,7 +34,7 @@ export default function TaskList() {
 
   const handlePageChange = (newPage: number) => {
     const params = new URLSearchParams(searchParams);
-    params.set('page', newPage.toString());
+    params.set("page", newPage.toString());
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -45,7 +45,7 @@ export default function TaskList() {
   return (
     <div className="space-y-6">
       {loading && <div className="text-center">Loading...</div>}
-      
+
       <div className="divide-y">
         {data.results.map((task: Task) => (
           <div key={task.id} className="py-4">
@@ -66,7 +66,9 @@ export default function TaskList() {
             <div className="mt-2 text-sm text-gray-500">
               <span>Status: {task.status}</span>
               <span className="mx-2">•</span>
-              <span>Created: {new Date(task.createdAt).toLocaleDateString()}</span>
+              <span>
+                Created: {new Date(task.createdAt).toLocaleDateString()}
+              </span>
               <span className="mx-2">•</span>
               <span>
                 Submission Deadline:{" "}
@@ -81,7 +83,7 @@ export default function TaskList() {
         <div className="text-sm text-gray-500">
           Showing page {data.page} of {data.lastPage} ({data.total} total items)
         </div>
-        
+
         <div className="flex gap-2">
           <Button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -118,7 +120,7 @@ export default function TaskList() {
             Next
           </Button>
         </div>
-      </div>  
+      </div>
     </div>
   );
 }

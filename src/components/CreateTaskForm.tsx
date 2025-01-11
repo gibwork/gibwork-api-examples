@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
-import { useWallet } from '@solana/wallet-adapter-react'
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function CreateTaskForm() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function CreateTaskForm() {
   const [error, setError] = useState<string | null>(null);
   const [tags, setTags] = useState<string[]>([]);
   const [currentTag, setCurrentTag] = useState("");
-  const {publicKey } = useWallet()
+  const { publicKey } = useWallet();
 
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && currentTag.trim()) {
