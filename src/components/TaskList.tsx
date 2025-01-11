@@ -55,7 +55,7 @@ export default function TaskList() {
                 {task.asset.price} {task.asset.symbol}
               </div>
             </div>
-            <p className="text-gray-600 mt-1">{task.description}</p>
+            <p className="text-gray-600 mt-1">{task.content}</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {task.tags.map((tag) => (
                 <Badge key={tag} variant="secondary" className="text-xs">

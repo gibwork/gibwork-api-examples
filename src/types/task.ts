@@ -1,4 +1,4 @@
-interface Asset{
+interface Asset {
   imageUrl: string;
   price: number;
   symbol: string;
@@ -12,17 +12,14 @@ export interface PaginatedResponse {
   total: number;
 }
 
-
 export interface Task {
-    id: string;
-    title: string;
-    description: string;
-    status: string;
-    createdAt: string;
-    deadline: string;
-    asset: Asset;
-    assetId: string;
-    tags: string[];
-    // Add other fields based on your API response
-  }
-
+  id: string;
+  title: string;
+  content: string;
+  status: string;
+  createdAt: string;
+  deadline: string;
+  asset: Asset;
+  assetId: string;
+  tags: string[];
+}
